@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -64,7 +66,7 @@ public final class QueryUtils {
                 // Pull out the "magnitude", "location", and "date" fields
                 String magnitude = properties.getString("mag");
                 String location = properties.getString("place");
-                String date = properties.getString("time");
+                long date = properties.getLong("time");
 
                 // Create a new Earthquake object, pass in the data, and add it the "earthquakes" list
                 earthquakes.add(new Earthquake(location, date, magnitude));

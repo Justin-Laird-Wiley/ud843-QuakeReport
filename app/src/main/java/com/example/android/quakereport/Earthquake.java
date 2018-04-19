@@ -8,7 +8,7 @@ public class Earthquake {
     // Location (by nearest major city) of the earthquake
     private String mLocation;
     // Date earthquake occurred
-    private String mDate;
+    private long mDate;
     // Magnitude of the earthquake
     private String mMagnitude;
 
@@ -19,7 +19,7 @@ public class Earthquake {
      * @param vDate      is the date earthquake occurred
      * @param vMagnitude is the magnitude of the earthquake
      */
-    public Earthquake(String vLocation, String vDate, String vMagnitude) {
+    public Earthquake(String vLocation, long vDate, String vMagnitude) {
         mLocation = vLocation;
         mDate = vDate;
         mMagnitude = vMagnitude;
@@ -35,7 +35,7 @@ public class Earthquake {
     /**
      * Get the date of the earthquake
      */
-    public String getDate() {
+    public long getDate() {
         return mDate;
     }
 

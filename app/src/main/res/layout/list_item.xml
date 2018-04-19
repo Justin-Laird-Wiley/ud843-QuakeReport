@@ -14,7 +14,9 @@
         android:id="@+id/earthquake_magnitude"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="0.7"
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
@@ -23,21 +25,35 @@
         android:id="@+id/earthquake_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:layout_weight="1"
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
-    <!-- TextView:  for earthquake date -->
-    <TextView
-        android:id="@+id/earthquake_date"
+    <!-- LinearLayout:  for earthquake date and time; vertical -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="0.8"
+        android:orientation="vertical">
+
+        <!-- TextView:  for earthquake date -->
+        <TextView
+            android:id="@+id/earthquake_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <!-- TextView:  for earthquake date -->
+        <TextView
+            android:id="@+id/earthquake_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
