@@ -16,18 +16,36 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_weight="0.7"
+        android:layout_weight="0.4"
         android:textColor="@android:color/black"
         android:textSize="12sp" />
 
-    <!-- TextView:  for earthquake location -->
-    <TextView
-        android:id="@+id/earthquake_location"
+    <!-- LinearLayout:  for earthquake locations; vertical -->
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:orientation="vertical">
+
+        <!-- TextView:  for earthquake sub location -->
+        <TextView
+            android:id="@+id/earthquake_location_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="8sp" />
+
+        <!-- TextView:  for earthquake main location -->
+        <TextView
+            android:id="@+id/earthquake_location_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+    </LinearLayout>
 
     <!-- LinearLayout:  for earthquake date and time; vertical -->
     <LinearLayout
@@ -35,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_weight="0.8"
+        android:layout_weight="0.7"
         android:orientation="vertical">
 
         <!-- TextView:  for earthquake date -->

@@ -5,17 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
+public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
-    private static final String LOG_TAG = EarthquakeArrayAdapter.class.getSimpleName();
+    private static final String LOG_TAG = EarthquakeAdapter.class.getSimpleName();
 
     /**
      * This is our own custom constructor (it doesn't mirror a superclass constructor).
@@ -25,7 +23,7 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
      * @param context             The current context. Used to inflate the layout file.
      * @param earthquakeArrayList A List of AndroidFlavor objects to display in a list
      */
-    public EarthquakeArrayAdapter(Activity context, ArrayList<Earthquake> earthquakeArrayList) {
+    public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakeArrayList) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // The second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
@@ -56,10 +54,15 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
 
         // *** LOCATION ***
         // Find the TextView in the list_item.xml layout with earthquake_location
-        TextView locationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location);
-        // Get the earthquake location from the current Earthquake object and
-        // set this text on the location TextView
-        locationTextView.setText(currentEarthquake.getLocation());
+        TextView subLocationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location_1);
+        TextView mainLocationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location_2);
+        // Get the earthquake location from the current Earthquake object, split it into two parts,
+        // and push them out to the TextView's in list_item.xml.
+        // For example, "4km SSE of Taron, Papua New Guinea" becomes:
+        //      4km SSE of
+        //      Taron, Papua New Guinea
+        subLocationTextView.setText(splitLocation(currentEarthquake.getLocation())[0]);
+        mainLocationTextView.setText(splitLocation(currentEarthquake.getLocation())[1]);
 
         // Create Date object and pass in (long) date from Earthquake
         Date earthquakeUTCDate = new Date(currentEarthquake.getDate());
@@ -90,6 +93,7 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
 
     /**
      * This method takes a raw UTC time code and puts it into "MMM DD, yyyy" format
+     *
      * @param dateToFormat is a Date object in millisecond time
      * @return is a String of formatted date
      */
@@ -100,6 +104,7 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
 
     /**
      * This method takes a raw UTC time code and puts it into "HH:mm:ss a" format
+     *
      * @param dateToFormat is a Date object in millisecond time
      * @return is a String of formatted time
      */
@@ -107,4 +112,29 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
         SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss a");
         return timeFormatter.format(dateToFormat);
     }
+
+    /**
+     * This method takes String of the earthquake's location and splits it into two parts:
+     * the distance-from substring ("8km NW of "; and the nearest-city substring.  If
+     *
+     * @param fullString is String of input location to be split
+     * @return array stringParts[2] with two location substrings
+     */
+    private String[] splitLocation(String fullString) {
+
+        // Array to hold string parts
+        String[] stringParts = new String[2];
+
+        // If the "fullString" contains "of " split it after "of " and put parts into "stringParts"
+        if (fullString.contains("of")) {
+            stringParts = fullString.split("of ");
+            stringParts[0] = stringParts[0] + "of ";
+        } else {
+            // Else put "Near the " into first substring and set second substring equal to "fullString"
+            stringParts[0] = "Near the ";
+            stringParts[1] = fullString;
+        }
+        return stringParts;
+    }
+
 }
