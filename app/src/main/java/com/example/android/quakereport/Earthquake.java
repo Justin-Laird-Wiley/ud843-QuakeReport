@@ -10,7 +10,7 @@ public class Earthquake {
     // Date earthquake occurred
     private long mDate;
     // Magnitude of the earthquake
-    private String mMagnitude;
+    private double mMagnitude;
 
     /**
      * Constructor for Earthquake class
@@ -19,7 +19,7 @@ public class Earthquake {
      * @param vDate      is the date earthquake occurred
      * @param vMagnitude is the magnitude of the earthquake
      */
-    public Earthquake(String vLocation, long vDate, String vMagnitude) {
+    public Earthquake(String vLocation, long vDate, double vMagnitude) {
         mLocation = vLocation;
         mDate = vDate;
         mMagnitude = vMagnitude;
@@ -42,7 +42,7 @@ public class Earthquake {
     /**
      * Get the magnitude earthquake
      */
-    public String getMagnitude() {
+    public double getMagnitude() {
         return mMagnitude;
     }
 }
