@@ -68,17 +68,13 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
         // Create TextView object and attach it to TextView earthquake_date in list_item.xml
         // Format millisecond time into "MMM DD, yyyy" and push it out to the TextView
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.earthquake_date);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
-        String earthquakeDateToDisplay = dateFormatter.format(earthquakeUTCDate);
-        dateTextView.setText(earthquakeDateToDisplay);
+        dateTextView.setText(formatDate(earthquakeUTCDate));
 
         // *** TIME ***
         // Create TextView object and attach it to TextView earthquake_time in list_item.xml
         // Format millisecond time into "HH:MM:SS" and push it out to the TextView
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.earthquake_time);
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss a");
-        String earthquakeTimeToDisplay = timeFormatter.format(earthquakeUTCDate);
-        timeTextView.setText(earthquakeTimeToDisplay);
+        timeTextView.setText(formatTime(earthquakeUTCDate));
 
         // *** MAGNITUDE ***
         // Find the TextView in the list_item.xml layout with the ID list_item_icon
@@ -90,5 +86,25 @@ public class EarthquakeArrayAdapter extends ArrayAdapter<Earthquake> {
         // Return the whole list item layout (containing 3 TextViews)
         // so that it can be shown in the ListView
         return listItemView;
+    }
+
+    /**
+     * This method takes a raw UTC time code and puts it into "MMM DD, yyyy" format
+     * @param dateToFormat is a Date object in millisecond time
+     * @return is a String of formatted date
+     */
+    private String formatDate(Date dateToFormat) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM DD, yyyy");
+        return dateFormatter.format(dateToFormat);
+    }
+
+    /**
+     * This method takes a raw UTC time code and puts it into "HH:mm:ss a" format
+     * @param dateToFormat is a Date object in millisecond time
+     * @return is a String of formatted time
+     */
+    private String formatTime(Date dateToFormat) {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss a");
+        return timeFormatter.format(dateToFormat);
     }
 }
