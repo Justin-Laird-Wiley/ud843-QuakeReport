@@ -1,6 +1,9 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +57,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake currentEarthquake = getItem(position);
 
         // *** LOCATION ***
-        // Find the TextView in the list_item.xml layout with earthquake_location
+        // Find the TextView at earthquake_location in the list_item.xml
         TextView subLocationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location_1);
         TextView mainLocationTextView = (TextView) listItemView.findViewById(R.id.earthquake_location_2);
         // Get the earthquake location from the current Earthquake object, split it into two parts,
@@ -81,12 +84,23 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         timeTextView.setText(formatTime(earthquakeUTCDate));
 
         // *** MAGNITUDE ***
-        // Find the TextView in the list_item.xml layout with the ID list_item_icon
+        // Create TextView object and attach it to TextView earthquake_time in list_item.xml
         TextView magnitudeView = (TextView) listItemView.findViewById(R.id.earthquake_magnitude);
-        // Get the earthquake magnitude from the current Earthquake object, format it to "0.0",
-        // and push the text out to the earthquake_magnitude TextView.
-        magnitudeView.setText(String.valueOf(formatMagnitude(currentEarthquake.getMagnitude())));
 
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeView.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+
+        // Set the proper background color on the magnitude circle.
+        magnitudeCircle.setColor(magnitudeColor);
+
+        // Get the earthquake magnitude from the current Earthquake object, format it to "0.0",
+        // and push the text out to the TextView.
+        magnitudeView.setText(formatMagnitude(currentEarthquake.getMagnitude(), "0.0"));
+
+        // *** RETURN ***
         // Return the whole list item layout (containing 3 TextViews)
         // so that it can be shown in the ListView
         return listItemView;
@@ -114,14 +128,58 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         return timeFormatter.format(dateToFormat);
     }
 
+    private int getMagnitudeColor(double magnitude) {
+
+
+        int magnitudeFloor = (int) Math.floor(magnitude);
+
+        int magnitudeColor;
+        switch ((int) magnitudeFloor) {
+            case 1:
+                magnitudeColor = R.color.magnitude1;
+                break;
+            case 2:
+                magnitudeColor = R.color.magnitude2;
+                break;
+            case 3:
+                magnitudeColor = R.color.magnitude3;
+                break;
+            case 4:
+                magnitudeColor = R.color.magnitude4;
+                break;
+            case 5:
+                magnitudeColor = R.color.magnitude5;
+                break;
+            case 6:
+                magnitudeColor = R.color.magnitude6;
+                break;
+            case 7:
+                magnitudeColor = R.color.magnitude7;
+                break;
+            case 8:
+                magnitudeColor = R.color.magnitude8;
+                break;
+            case 9:
+                magnitudeColor = R.color.magnitude9;
+                break;
+            case 10:
+                magnitudeColor = R.color.magnitude10plus;
+                break;
+            default:
+                magnitudeColor = 000000;
+                break;
+        }
+        return ContextCompat.getColor(getContext(), magnitudeColor);
+    }
+
     /**
      * This method takes a double and puts it into "0.0" format
      *
      * @param magnitudeToFormat is double to be formatted
      * @return is a formatted double
      */
-    private String formatMagnitude(double magnitudeToFormat) {
-        DecimalFormat formatter = new DecimalFormat("0.0");
+    private String formatMagnitude(double magnitudeToFormat, String format) {
+        DecimalFormat formatter = new DecimalFormat(format);
         return formatter.format(magnitudeToFormat);
     }
 

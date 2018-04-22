@@ -30,7 +30,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
 
-        // Define array "earthquakes" of Earthquake objects
+        // Create array "earthquakes" of Earthquake objects, and populate with data
         ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();
 
         // Create ListView object and attach it to the ListView in earthquake_activity.xml
