@@ -25,7 +25,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      * to populate into the lists.
      *
      * @param context             The current context. Used to inflate the layout file.
-     * @param earthquakeArrayList A List of AndroidFlavor objects to display in a list
+     * @param earthquakeArrayList A List of Earthquake objects to display in a list
      */
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakeArrayList) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
