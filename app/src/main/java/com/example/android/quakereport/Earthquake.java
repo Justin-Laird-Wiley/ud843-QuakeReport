@@ -11,6 +11,8 @@ public class Earthquake {
     private long mDate;
     // Magnitude of the earthquake
     private double mMagnitude;
+    // URL of USGS website about earthquake
+    private String mUrl;
 
     /**
      * Constructor for Earthquake class
@@ -19,14 +21,15 @@ public class Earthquake {
      * @param vDate      is the date earthquake occurred
      * @param vMagnitude is the magnitude of the earthquake
      */
-    public Earthquake(String vLocation, long vDate, double vMagnitude) {
+    public Earthquake(String vLocation, long vDate, double vMagnitude, String vUrl) {
         mLocation = vLocation;
         mDate = vDate;
         mMagnitude = vMagnitude;
+        mUrl = vUrl;
     }
 
     /**
-     * Get the name of the location
+     * Get the location name of the earthquake
      */
     public String getLocation() {
         return mLocation;
@@ -40,9 +43,15 @@ public class Earthquake {
     }
 
     /**
-     * Get the magnitude earthquake
+     * Get the magnitude of the earthquake
      */
     public double getMagnitude() {
         return mMagnitude;
     }
+
+    /**
+     * Get the URL of the earthquake
+     */
+    public String getUrl() { return mUrl; }
+
 }

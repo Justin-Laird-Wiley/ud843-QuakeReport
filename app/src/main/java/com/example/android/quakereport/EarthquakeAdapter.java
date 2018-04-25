@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -99,6 +101,9 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Get the earthquake magnitude from the current Earthquake object, format it to "0.0",
         // and push the text out to the TextView.
         magnitudeView.setText(formatMagnitude(currentEarthquake.getMagnitude(), "0.0"));
+
+        TextView urlTextView = (TextView) listItemView.findViewById(R.id.url_cache);
+        urlTextView.setText(currentEarthquake.getUrl());
 
         // *** RETURN ***
         // Return the whole list item layout (containing 3 TextViews)

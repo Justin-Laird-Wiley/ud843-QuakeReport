@@ -67,9 +67,10 @@ public final class QueryUtils {
                 double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long date = properties.getLong("time");
+                String url = properties.getString("url");
 
                 // Create a new Earthquake object, pass in the data, and add it the "earthquakes" list
-                earthquakes.add(new Earthquake(location, date, magnitude));
+                earthquakes.add(new Earthquake(location, date, magnitude, url));
             }
 
         } catch (JSONException e) {

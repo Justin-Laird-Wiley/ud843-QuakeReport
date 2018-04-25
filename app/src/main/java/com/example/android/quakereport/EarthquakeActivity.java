@@ -15,9 +15,17 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -43,4 +51,25 @@ public class EarthquakeActivity extends AppCompatActivity {
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(adapter);
     }
+
+    public void openWebPage(View view) {
+
+        // Get parent LinearLayout of the item that was clicked in ListView
+        LinearLayout location = (LinearLayout) view;
+        // Find the invisible TextView that stores the earthquake URL
+        TextView secretView = (TextView) location.getChildAt(0);
+        // Get the URL from the TextView and put it in urlName
+        String urlName = secretView.getText().toString();
+
+        // Parse the URL and pass it off to the intent
+        Uri webpage = Uri.parse(urlName);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+
+    }
+
 }
+
